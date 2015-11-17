@@ -9,10 +9,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class FrameCLie {
+public class FrameCLie  {
 
-	private JFrame frame;
-	private JTextField textField;
+	 JFrame frame;
+	 JTextField textField;
+	 JTextArea txtrText;
 	static ClientThread listenServer;
 
 	/**
@@ -66,7 +67,7 @@ public class FrameCLie {
 		Send.setBounds(457, 385, 128, 35);
 		frame.getContentPane().add(Send);
 
-		JTextArea txtrText = new JTextArea();
+		txtrText = new JTextArea();
 		txtrText.setWrapStyleWord(true);
 		txtrText.setLineWrap(true);
 		txtrText.setBackground(Color.LIGHT_GRAY);
