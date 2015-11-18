@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -14,17 +15,20 @@ public class FrameCLie  {
 	 JFrame frame;
 	 JTextField textField;
 	 JTextArea txtrText;
-	static ClientThread listenServer;
-
+	//static ClientThread listenServer;
+	//static ServerThread listenClient;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		listenServer = new ClientThread();
+		ClientThread listenServer = new ClientThread(); 
+		ServerThread listenClient = new ServerThread(Server.sock);
 		Thread serverListen = new Thread(listenServer);
 		serverListen.start();
-		
-		
+		Thread clientListen = new Thread(listenClient);
+		clientListen.start();
+		Client.setConnection();
+		Client.Login = JOptionPane.showInputDialog("write login");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -68,7 +72,6 @@ public class FrameCLie  {
 		frame.getContentPane().add(Send);
 
 		txtrText = new JTextArea();
-		txtrText.setWrapStyleWord(true);
 		txtrText.setLineWrap(true);
 		txtrText.setBackground(Color.LIGHT_GRAY);
 		txtrText.setBounds(10, 15, 413, 362);
@@ -93,6 +96,8 @@ public class FrameCLie  {
 				Client.message = Client.Login+": "+textField.getText();
 				Client.writer.println(Client.message);
 				Client.writer.flush();
+				textField.setText("");
+				textField.requestFocus();
 			}
 		});
 

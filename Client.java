@@ -21,7 +21,7 @@ public class Client  {
 			InputStreamReader is = new InputStreamReader(sock.getInputStream());
 			reader = new BufferedReader(is);
 			writer = new PrintWriter(sock.getOutputStream());
-			Login = JOptionPane.showInputDialog("write login");
+			
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
